@@ -1,10 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
-struct node
-{
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
     int data;
     struct node* next;
-}*head;
+} *head;
 
 void createlist(int n);
 void displaylist();
@@ -16,11 +16,10 @@ void DeleteFromEnd();
 void DeleteFromMid(int position);
 void searching(int searchitem);
 
-int main()
-{
-    int n,position;
+int main() {
+    int n, position, value;
     printf("Enter the number of input\n");
-    scanf("%d",&n);
+    scanf("%d", &n);
     createlist(n);
     printf("\n\nData in the list are\n");
     displaylist();
@@ -28,7 +27,7 @@ int main()
     printf("\n\nData in the list are\n");
     displaylist();
     printf("\n\nEnter the position where you want to insert the new node\n");
-    scanf("%d",&position);
+    scanf("%d", &position);
     InsertAtMid(position);
     printf("\n\n");
     displaylist();
@@ -39,7 +38,7 @@ int main()
     printf("\n\nAfter deleting first value the data in the list are\n");
     displaylist();
     printf("\n\nEnter the position of the node you want to delete\n");
-    scanf("%d",&position);
+    scanf("%d", &position);
     DeleteFromMid(position);
     printf("\n\nAfter deleting the node data in the list are\n");
     displaylist();
@@ -47,62 +46,55 @@ int main()
     printf("\n\nAfter deleting last value the data in the list are\n");
     displaylist();
     printf("Enter the value you want to search\n");
-    scanf("%d",&value);
+    scanf("%d", &value);
     searching(value);
     return 0;
 }
 
-void createlist(int n)
-{
-    struct node *newnode,*current;
-    int value,i;
-    head=(struct node*)malloc(sizeof(struct node));
-
-    if(head==NULL)
+void createlist(int n) {
+    struct node *newnode, *current;
+    int value, i;
+    head = (struct node*)malloc(sizeof(struct node));
+    if (head == NULL) {
         printf("Memory full\n");
-    else
-    {
-        printf("Enter first value\n");
-        scanf("%d",&value);
-        head->data=value;
-        head->next=NULL;
-        current=head;
-        for(i=1; i<n; i++)
-        {
-            newnode=(struct node*)malloc(sizeof(struct node));
-
-            printf("Enter value %d\n",i+1);
-            scanf("%d",&value);
-            newnode->data=value;
-            newnode->next=NULL;
-            current->next=newnode;
-            current=newnode;
-        }
+        return;
+    }
+    printf("Enter first value\n");
+    scanf("%d", &value);
+    head->data = value;
+    head->next = NULL;
+    current = head;
+    for (i = 1; i < n; i++) {
+        newnode = (struct node*)malloc(sizeof(struct node));
+        printf("Enter value %d\n", i + 1);
+        scanf("%d", &value);
+        newnode->data = value;
+        newnode->next = NULL;
+        current->next = newnode;
+        current = newnode;
     }
 }
 
-void InsertAtBeginning()
-{
-    struct node *newnode;
-    newnode=(struct node*)malloc(sizeof(struct node));
+void InsertAtBeginning() {
+    struct node* newnode;
+    newnode = (struct node*)malloc(sizeof(struct node));
     printf("\n\nEnter the value you want to insert at the beginning of the linked list\n");
-    scanf("%d",&newnode->data);
-    newnode->next=head;
-    head=newnode;
+    scanf("%d", &newnode->data);
+    newnode->next = head;
+    head = newnode;
 }
 
-void InsertAtMid(int position)
-{
-    struct node* current,*newnode;
+void InsertAtMid(int position) {
+    struct node* current, * newnode;
     int i;
-    current=head;
-    for(i=1;i<position-1;i++)
-        current=current->next;
-    newnode=(struct node*)malloc(sizeof(struct node));
+    current = head;
+    for (i = 1; i < position - 1; i++)
+        current = current->next;
+    newnode = (struct node*)malloc(sizeof(struct node));
     printf("\n\nEnter the value you want to insert in the linked list\n");
-    scanf("%d",&newnode->data);
-    newnode->next=current->next;
-    current->next=newnode;
+    scanf("%d", &newnode->data);
+    newnode->next = current->next;
+    current->next = newnode;
 }
 
 void InsertAtEnd()
@@ -176,29 +168,6 @@ void searching(int searchitem)
         printf("Search item not found");
     }
 }
-void searching(int searchitem)
-{
-    int i=0;
-    struct node* current;
-    current=head;
-    while(current!=NULL)
-    {
-        if(current->data==searchitem)
-        {
-            printf("Search item is found");
-            break;
-        }
-        else
-        {
-            current=current->next;
-        }
-    }
-    if(current==NULL)
-    {
-        printf("Search item not found");
-    }
-}
-
 
 void displaylist()
 {
